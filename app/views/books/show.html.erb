@@ -43,15 +43,15 @@
       
           <div class="comments">
             <% @book.book_comments.each do |book_comment| %>
-                <%= attachment_image_tag(book_comment.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %>
+                <p><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></p>
                 <%= book_comment.user.name %>
                 <%= book_comment.comment %>
-           <div class="comment-delete">
-              <% if post_comment.user == current_user %>
+            <div class="comment-delete">
+              <% if book_comment.user == current_user %>
                 <%= link_to "Destroy",book_book_comments_path(book_comment.book,book_comment), method: :delete %>
               <% end %>  
             <% end %>
-           </div> 
+            </div> 
           </div>
           
           <div class="new-comment">
