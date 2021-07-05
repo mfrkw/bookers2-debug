@@ -7,11 +7,14 @@ Rails.application.routes.draw do
   post 'follow/:id' => 'relationships#follow', as: 'follow'
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
   
-  get 'relationships/followings' => 'relationships#followings', as: 'followings'
-  get 'relationshipsfollowers' => 'relationships#followers', as: 'followers'
-
-  resources :users, only: [:show,:index,:edit,:update] 
-  resources :relationships, only: [:create, :destroy]
+  resources :users, only: [:index, :show, :edit, :update] do
+# ——————————————— ここから ———————————————
+  resource :relationships, only: [:create, :destroy]
+  get 'followings' => 'relationships#followings', as: 'followings'
+  get 'followers' => 'relationships#followers', as: 'followers'
+# ——————————— ここまでネストさせる ———————————
+end
+  
   resources :books do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
