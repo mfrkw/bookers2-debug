@@ -1,7 +1,6 @@
 class SearchesController < ApplicationController
   def search
-    @user = params["search"]["model"]
-    @book = params["search"]["model"]
+    @model = params["search"]["model"]
     @value = params["search"]["value"] 
     @how = params["search"]["how"]
     @datas = search_for(@how, @model, @value) 
@@ -18,7 +17,7 @@ class SearchesController < ApplicationController
   end
   
   def forward(model, value)
-    if model == 'User'
+    if model == 'user'
       User.where("name LIKE ?", "#{value}%")
     elsif model == 'book'
       Book.where("title LIKE ?", "#{value}%")
