@@ -1,0 +1,2 @@
+$('#book_comments<%= @book.id %>').html("<%= j(render "book_comments/book_comments", book_comment: @book_comment) %>");
+$("#book_comments").val("");
